@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stock Screener -- Paper Trading Dashboard</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f7f7f8; --card-bg: #ffffff; --text: #1a1a1e; --muted: #6b6b76;
+  --border: #e2e2e6; --accent: #2f6fed; --pos: #1a8a4a; --neg: #d1373f;
+  --grid: #e8e8ec;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131318; --card-bg: #1c1c24; --text: #ececf0; --muted: #9a9aa6;
+    --border: #2e2e38; --accent: #6fa0ff; --pos: #3ecb7e; --neg: #ff6b6f;
+    --grid: #2a2a34;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 24px; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.45;
+}
+.wrap { max-width: 960px; margin: 0 auto; }
+header { margin-bottom: 24px; }
+h1 { font-size: 1.4rem; margin: 0 0 6px; }
+.meta { color: var(--muted); font-size: 0.9rem; }
+.badge {
+  display: inline-block; padding: 2px 10px; border-radius: 999px;
+  font-size: 0.8rem; font-weight: 600; margin-right: 8px;
+}
+.badge.paper { background: #fff3cd; color: #7a5b00; }
+.badge.live { background: #d4f4dd; color: #14532d; }
+@media (prefers-color-scheme: dark) {
+  .badge.paper { background: #4a3c00; color: #ffe58a; }
+  .badge.live { background: #123d24; color: #7be8a3; }
+}
+.cards {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px; margin: 20px 0;
+}
+.card {
+  background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px 16px;
+}
+.card .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+.card .value { font-size: 1.4rem; font-weight: 700; margin-top: 4px; }
+.card .sub { color: var(--muted); font-size: 0.82rem; margin-top: 2px; }
+section { margin: 28px 0; }
+h2 { font-size: 1.05rem; margin: 0 0 10px; }
+table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); font-size: 0.88rem; }
+th { color: var(--muted); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; }
+tr:last-child td { border-bottom: none; }
+.pos { color: var(--pos); font-weight: 600; }
+.neg { color: var(--neg); font-weight: 600; }
+.empty { color: var(--muted); font-style: italic; }
+.chart-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+svg { width: 100%; height: auto; display: block; }
+.grid { stroke: var(--grid); stroke-width: 1; }
+.axis-label { fill: var(--muted); font-size: 10px; }
+.equity-line { stroke: var(--accent); stroke-width: 2; }
+.dot { fill: var(--accent); }
+footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Paper Trading Dashboard</h1>
+    <div class="meta">
+      <span class="badge paper">PAPER TRADING</span>
+      <span>Hari ke-11 dari ~21-28 hari masa validasi</span><br />
+      Terakhir diperbarui: 2026-07-22 09:03:29
+    </div>
+  </header>
+
+  
+    <div class="cards">
+      <div class="card">
+        <div class="label">Cumulative Return</div>
+        <div class="value pos">+1.9%</div>
+        <div class="sub">realized + unrealized</div>
+      </div>
+      <div class="card">
+        <div class="label">Win Rate</div>
+        <div class="value">11.1%</div>
+        <div class="sub">9 closed trades</div>
+      </div>
+      <div class="card">
+        <div class="label">Total Trades</div>
+        <div class="value">13</div>
+        <div class="sub">4 open, 9 closed</div>
+      </div>
+      <div class="card">
+        <div class="label">Paper Equity</div>
+        <div class="value">$1,874.98</div>
+        <div class="sub">≈ Rp 30,562,145</div>
+      </div>
+    </div>
+    
+
+  <section>
+    <h2>Equity Curve</h2>
+    <div class="chart-card"><svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Equity curve"><line x1="70" y1="226.0" x2="680" y2="226.0" class="grid" /><text x="62" y="226.0" class="axis-label" text-anchor="end" dominant-baseline="middle">$1,827</text><line x1="70" y1="173.5" x2="680" y2="173.5" class="grid" /><text x="62" y="173.5" class="axis-label" text-anchor="end" dominant-baseline="middle">$1,840</text><line x1="70" y1="121.0" x2="680" y2="121.0" class="grid" /><text x="62" y="121.0" class="axis-label" text-anchor="end" dominant-baseline="middle">$1,854</text><line x1="70" y1="68.5" x2="680" y2="68.5" class="grid" /><text x="62" y="68.5" class="axis-label" text-anchor="end" dominant-baseline="middle">$1,867</text><line x1="70" y1="16.0" x2="680" y2="16.0" class="grid" /><text x="62" y="16.0" class="axis-label" text-anchor="end" dominant-baseline="middle">$1,880</text><polyline points="70.0,173.2 146.2,205.7 222.5,169.1 298.8,173.4 375.0,104.3 451.2,58.1 527.5,62.6 603.8,104.6 680.0,36.3" class="equity-line" fill="none" /><circle cx="70.0" cy="173.2" r="3" class="dot" /><circle cx="146.2" cy="205.7" r="3" class="dot" /><circle cx="222.5" cy="169.1" r="3" class="dot" /><circle cx="298.8" cy="173.4" r="3" class="dot" /><circle cx="375.0" cy="104.3" r="3" class="dot" /><circle cx="451.2" cy="58.1" r="3" class="dot" /><circle cx="527.5" cy="62.6" r="3" class="dot" /><circle cx="603.8" cy="104.6" r="3" class="dot" /><circle cx="680.0" cy="36.3" r="3" class="dot" /><text x="70.0" y="244" class="axis-label" text-anchor="middle">2026-07-12</text><text x="375.0" y="244" class="axis-label" text-anchor="middle">2026-07-16</text><text x="680.0" y="244" class="axis-label" text-anchor="middle">2026-07-22</text></svg></div>
+  </section>
+
+  <section>
+    <h2>Posisi Terbuka</h2>
+    <table><thead><tr><th>Ticker</th><th>Sleeve</th><th>Entry Date</th><th>Days Held</th><th>Entry Price</th><th>Current Price</th><th>Unrealized</th></tr></thead><tbody><tr><td>VLO</td><td>core</td><td>2026-07-12</td><td>10</td><td>$280.69</td><td>$314.80</td><td class="pos">+12.2%</td></tr>
+<tr><td>MPC</td><td>core</td><td>2026-07-15</td><td>7</td><td>$297.21</td><td>$319.76</td><td class="pos">+7.6%</td></tr>
+<tr><td>MATX</td><td>tactical</td><td>2026-07-18</td><td>4</td><td>$222.18</td><td>$219.19</td><td class="neg">-1.3%</td></tr>
+<tr><td>PSX</td><td>core</td><td>2026-07-21</td><td>1</td><td>$208.80</td><td>$212.27</td><td class="pos">+1.7%</td></tr></tbody></table>
+  </section>
+
+  <section>
+    <h2>Riwayat Trade Ditutup</h2>
+    <table><thead><tr><th>Ticker</th><th>Sleeve</th><th>Entry Date</th><th>Exit Date</th><th>Entry Price</th><th>Exit Price</th><th>Realized</th><th>Reason</th></tr></thead><tbody><tr><td>TGTX</td><td>core</td><td>2026-07-12</td><td>2026-07-21</td><td>$57.12</td><td>$53.96</td><td class="neg">-6.2%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>TECH</td><td>tactical</td><td>2026-07-12</td><td>2026-07-18</td><td>$71.30</td><td>$72.12</td><td class="pos">+0.5%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>DVA</td><td>core</td><td>2026-07-12</td><td>2026-07-15</td><td>$232.80</td><td>$228.68</td><td class="neg">-2.4%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>ALL</td><td>core</td><td>2026-07-12</td><td>2026-07-12</td><td>$251.61</td><td>$251.61</td><td class="neg">-0.0%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>RY</td><td>core</td><td>2026-07-12</td><td>2026-07-12</td><td>$211.09</td><td>$211.09</td><td class="neg">-0.0%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>LLY</td><td>core</td><td>2026-07-12</td><td>2026-07-12</td><td>$1,188.58</td><td>$1,188.58</td><td class="pos">+0.0%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>JNJ</td><td>core</td><td>2026-07-12</td><td>2026-07-12</td><td>$256.98</td><td>$256.98</td><td class="pos">+0.0%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>KO</td><td>core</td><td>2026-07-12</td><td>2026-07-12</td><td>$83.49</td><td>$83.49</td><td class="pos">+0.0%</td><td>Keluar dari top-ranked</td></tr>
+<tr><td>AAPL</td><td>tactical</td><td>2026-07-12</td><td>2026-07-12</td><td>$315.32</td><td>$315.32</td><td class="pos">+0.0%</td><td>Keluar dari top-ranked</td></tr></tbody></table>
+  </section>
+
+  <footer>
+    Output tool screening sistematis untuk paper-trading, bukan nasihat keuangan. Komponen momentum+volume
+    tactical tervalidasi backtest; eps-surprise, analyst score, quality floor, dan seluruh core score belum
+    tervalidasi historis.
+  </footer>
+</div>
+</body>
+</html>
